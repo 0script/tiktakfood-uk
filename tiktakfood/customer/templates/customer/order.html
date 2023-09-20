@@ -1,0 +1,187 @@
+{% extends 'customer/base.html' %}
+
+{% load custom_tag %}
+
+{% block content %}
+    <div class="container">
+
+
+
+        {% if whishlist %}
+            <section class="h-100 h-custom" style="background-color: #eee;">
+                <div class="container py-5 h-100">
+                <form id="whishlist-form" class="row d-flex justify-content-center align-items-center h-100">
+                    {% csrf_token %}
+                    
+                    <div class="col-lg-14 col-xl-12">
+                    <div class="card border-top border-bottom border-3" style="border-color:  #4b45c7 !important;">
+                        <div class="card-body p-5">
+            
+                        <p class="lead fw-bold mb-5" style="color:  #4b45c7;">Whishlist for {{ whishlist.customer.username }}</p>
+            
+                        <div class="row">
+                            <div class="col mb-3">
+                            <p class="small text-muted mb-1">Date</p>
+                            <p>{{ whishlist.creation_date }}</p>
+                            </div>
+                        </div>
+
+            
+                        {% for item in item_quantity %}
+                            <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
+                                <div class="row">
+                                <div class="col-md-8 col-lg-9">
+                                    <p>{{ item.menu_item.name}} x {{ item.quantity}}</p>
+                                </div>
+                                <div class="col-md-4 col-lg-3">
+                                    <p>Rwf  {{ item.menu_item.price}}</p>
+                                </div>
+                                <button class="btn btn-primary add-to-order" id="{{ item.id }}">Add To Order</button>
+                                </div>
+                            </div>
+                        {% endfor %}
+            
+                        <p class="mt-4 pt-2 mb-0">Want any help? <a href="#!" style="color:  #4b45c7;">Please contact
+                            us</a></p>
+            
+                        </div>
+                    </div>
+                    </div>
+                </form>
+                </div>
+            </section>
+        
+        {% endif %}
+
+        {% if orders %}
+            {% for order in orders %}
+                <section class="h-100 h-custom" style="background-color: #eee;">
+                    <div class="container py-5 h-100">
+                    <form id="whishlist-form" class="row d-flex justify-content-center align-items-center h-100">
+                        {% csrf_token %}
+                        
+                        <div class="col-lg-10 col-xl-9">
+                        <div class="card border-top border-bottom border-3" style="border-color:  #4b45c7 !important;">
+                            <div class="card-body p-5">
+                
+                            <p class="lead fw-bold mb-5" style="color:  #4b45c7;">Order for {{ request.user.username }}</p>
+                
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <p class="small text-muted mb-1">Date</p>
+                                    <p>{{ order.creation_date }}</p>
+                                </div>
+
+                                <div class="col mb-3">
+                                    <p class="small text-muted mb-1">Order No.</p>
+                                    <p>{{ order.id }}</p>
+                                </div>
+                    
+                            </div>
+
+
+                            {% for item in item_quantity_order %}
+
+                                {% if item.order.id == order.id %}
+                                
+                                    <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
+                                        <div class="row">
+                                            <div class="col-md-8 col-lg-9">
+                                            <p>{{ item.menu_item.name}} x {{ item.quantity}}</p>
+                                        </div>
+                                        
+                                        <div class="col-md-4 col-lg-3 " >
+                                            <p class="item-price" id="item_x_price_order-{{ order.id }}">Rwf {% multiply item.quantity item.menu_item.price %}</p>
+                                        </div>
+
+                                        </div>
+                                    </div>
+                                    <p style="width: 3px;"></p>
+                                {% endif %}
+                                
+                            {% endfor %}
+                            
+                            <div class="row my-4">
+                                <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
+                                <p class="lead fw-bold mb-0 total-price" id="total-order-{{ order.id }}" style="color: #f37a27;" >Rwf 262.99</p>
+                                </div>
+                            </div>
+                            
+                            
+                            <p class="lead fw-bold mb-4 pb-2" style="color: #f37a27;">Tracking Order</p>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                    
+                                    <div class="horizontal-timeline">
+                    
+                                    <ul class="list-inline items d-flex justify-content-between">
+                                        
+                                        <li class="list-inline-item items-list">
+                                            <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">Ordered</p
+                                                class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">
+                                        </li>
+                                        
+                                        {% if order.delivery %}
+                                            <li class="list-inline-item items-list">
+                                                <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">In Preparation</p
+                                                    class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">
+                                            </li>
+                                        {% endif %}
+
+                                        {% if order.is_ready %}
+                                            <li class="list-inline-item items-list">
+                                                <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">Ready</p
+                                                    class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">
+                                            </li>
+
+                                            <li class="list-inline-item items-list">
+                                                <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">On The Way</p
+                                                    class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">
+                                            </li>
+
+                                        {% endif %}
+                                        
+
+                                        {% if order.delivered %}
+                                            <li class="list-inline-item items-list">
+                                                <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">On The Way</p
+                                                    class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">
+                                            </li>
+                                        {% endif %}
+
+                                        
+
+                                    </ul>
+                    
+                                    </div>
+                    
+                                </div>  
+                            </div>
+                            
+                            {% if order.delivered %}
+                                <div class="row">
+                                    <div class="col mb-3">
+                                    <p class="small text-muted mb-1">Delivery Date</p>
+                                    <p>{{ order.creation_date }}</p>
+                                    </div>
+                                </div>
+
+                            {% endif %}
+
+                            <p class="mt-4 pt-2 mb-0">Want any help? <a href="#!" style="color:  #4b45c7;">Please contact
+                                us</a></p>
+                
+                            </div>
+                        </div>
+                        </div>
+                    </form>
+                    </div>
+                </section>
+            {% endfor %}
+
+        {% endif %}
+
+        
+    </div>
+{% endblock content %}

@@ -1,0 +1,82 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container register">
+    <div class="container register">
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                <h3>Welcome</h3>
+                <p>You are 30 seconds away of getting new customer!</p>
+                <!-- <input type="submit" name="" value="Login"/><br/> -->
+                <a href="{% url 'login' %}" class="btn btn-primary rounded">Login</a>
+            </div>
+            <div class="col-md-9 register-right">
+                <!-- <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Employee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Hirer</a>
+                    </li>
+                </ul> -->
+
+                <!-- form -->
+
+                <form class="tab-content" id="myTabContent" method="POST">
+                    {% csrf_token %}
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Register a Restaurant Account</h3>
+                        <div class="row register-form">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="name" placeholder="Restaurant Name *" value="" />
+                                    <small class="form-text text-muted">{{formError}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Restaurant Address *" value="" name="restaurant_address"/>
+                                    <small class="form-text text-muted">{{formError}}</small>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Phone Number *" value="" name="restaurant_phone"/>
+                                    <small class="form-text text-muted">{{formError}}</small>
+                                </div>
+
+                            </div>
+
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Enter Email *" value="" name="restaurant_email" required/>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label for="profile_picture">Profile Picture</label>
+                                    <input type="file" accept="image/png, image/jpeg" class="button"  name="picture" id="profile_picture" placeholder="Enter Profile Picture">
+                                    <small id="dob-errors" class="form-text text-muted"></small>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <select class="form-control">
+                                        <option class="hidden"  selected disabled>Please select your Sequrity Question</option>
+                                        <option>What is your Birthdate?</option>
+                                        <option>What is Your old Phone Number</option>
+                                        <option>What is your Pet Name?</option>
+                                    </select>
+                                </div> -->
+
+                                <input type="submit"  class="btn btn-primary rounded"  value="Register"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

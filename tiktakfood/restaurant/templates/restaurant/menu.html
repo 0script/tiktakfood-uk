@@ -1,0 +1,60 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6 col-sm-12 text-center">
+            <h1>Your Selection</h1>
+            {% if request.session.username %}
+                Welcome , {{ request.session.username }}.
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8 col-sm-12 text-center">
+            <form method="GET" action="{% url 'menu-search' %}">
+                <div class="md-form mt-0 active-cyan-2">
+                    <input class="form-control" name="q" type="text" placeholder="Search Our Menu" aria-label="Search" value="{{ request.GET.q }}">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row card-deck justify-content-center">
+        {% for item in menu_items %}
+        <div class="col-xs-12 col-sm-6 col-md-4 m-4">
+           
+            <div class="card">
+                <div class="view overlay">
+                    <img class="card-img-top" src="{{ item.image.url }}" alt="Card image cap">
+                    <a href="{{ item.image.url }}">
+                      <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+                <!--Card content-->
+                <div class="card-body">
+
+                    <!--Title-->
+                    <h4 class="card-title">{{ item.name }}</h4>
+                    <!--Text-->
+                    <p class="card-text">{{ item.ingredient }}</p>    <p><span class="font-weight-bold">{{item.price}}</span>Rwf</p>
+                    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                    <a href="{{ item.get_absolute_url  }}">
+                        <button type="button" class="btn btn-light-blue btn-md">Order</button>
+                    </a>
+
+            
+                </div>
+              
+            </div>
+        
+        </div>        
+        {% endfor %}
+
+    </div>
+
+
+</div>
+{% endblock content %}

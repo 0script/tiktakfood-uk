@@ -1,0 +1,142 @@
+{% extends 'restaurant/base.html' %}
+
+{% load custom_tag %}
+
+{% block content %}
+    <div class="container">
+        {% for order in orders %}
+
+            <section class=" h-custom" style="background-color: #eee;">
+                <div class="container py-5 h-100">
+                    <form class="restaurant-orders-form">{% csrf_token %}</form>
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-lg-14 col-xl-12">
+                            
+                                <form id="restaurant-order-form" class="card border-top border-bottom border-3" style="border-color:  #4b45c7 !important;">
+                                    {% csrf_token %}
+                                    <div class="card-body p-5">
+                        
+                                        <p class="lead fw-bold mb-5" style="color:  #4b45c7;">Order Receipt ,{{ order.customer.username}}</p>
+                            
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                            <p class="small text-muted mb-1">Date</p>
+                                            <p>{{ order.creation_date }}</p>
+                                            </div>
+                                            <div class="col mb-3">
+                                            <p class="small text-muted mb-1">Order No.</p>
+                                            <p>{{ order.id }}</p>
+                                            </div>
+                                        </div>
+                                        
+                                        {% for item in item_quantity %}
+                                            {% if item.order.id == order.id %}
+                                                <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
+                                                    <div class="row">
+                                                        <div class="col-md-8 col-lg-9">
+                                                        <p>{{ item.menu_item.name}} x {{ item.quantity}}</p>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-4 col-lg-3 " >
+                                                        <p class="item-price" id="item_x_price_order-{{ order.id }}">Rwf {% multiply item.quantity item.menu_item.price %}</p>
+                                                    </div>
+
+                                                    </div>
+                                                </div>
+                                                <p style="width: 3px;"></p>
+                                            {% endif %} 
+                                        {% endfor %}
+
+                                        
+                            
+                                        <div class="row my-4">
+                                            <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
+                                            <p class="lead fw-bold mb-0 total-price" id="total-order-{{ order.id }}" style="color: #f37a27;" >Rwf 262.99</p>
+                                            </div>
+                                        </div>
+                            
+                                        <p class="lead fw-bold mb-4 pb-2" style="color:  #4b45c7;">Tracking Order</p>
+                            
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                            
+                                            <div class="horizontal-timeline">
+                            
+                                                <ul class="list-inline items d-flex justify-content-between">
+                                                    <li class="list-inline-item items-list">
+                                                        <button 
+                                                            
+
+                                                            class="py-1 px-2 rounded text-white orders-btn order-btn-{{ order.id }}" 
+                                                            style=" border-style: none ;background-color:  #4b45c7;"
+                                                        >
+                                                            Ordered
+                                                        </button>
+                                                    </li>
+                                                    <li class="list-inline-item items-list">
+                                                        <button 
+                                                            class="py-1 px-2 rounded text-white orders-btn order-btn-{{ order.id }}" 
+                                                            
+                                                            {% if order.is_ready %}
+                                                                style="border-style: none ; background-color:#4b45c7;"
+                                                            {% else %}
+                                                                style=" border-style: none ; background-color:#FF3232;"
+                                                            {% endif %}
+
+                                                        >
+                                                            Shipped
+                                                        </button>
+                                                    </li>
+
+                                                    <li class="list-inline-item items-list">
+                                                        <button 
+                                                            class="py-1 px-2 rounded text-white orders-btn order-btn-{{ order.id }}" 
+                                                            {% if order.is_ready %}
+                                                                style="border-style: none ; background-color:#4b45c7;"
+                                                            {% else %}
+                                                                style="border-style: none ; background-color:#FF3232;"
+                                                            {% endif %}
+                                                        >
+                                                            On the way
+                                                    </button>
+                                                    </li>
+                                                    <li class="list-inline-item items-list text-end" style="margin-right: 8px;">
+                                                        <button 
+                                                            class="py-1 px-2 rounded text-white orders-btn order-btn-{{ order.id }}" 
+                                                            {% if order.delivered %}
+                                                                style="border-style: none ; background-color:#4b45c7;"
+                                                            {% else %}
+                                                                style="border-style: none ; background-color:#FF3232;"
+                                                            {% endif %}
+                                                            style="margin-right: -8px;"
+                                                        >
+                                                            Delivered
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                            
+                                            </div>
+                            
+                                            </div>
+                                        </div>
+                            
+                                        <p class="mt-4 pt-2 mb-0">Want any help? <a href="#!" style="color:  #4b45c7;">Please contact
+                                            us</a></p>
+                            
+                                    </div>
+                                </form>
+                            
+                            <p style="width: 13px;"></p>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        {% endfor %}
+        
+    </div>
+{% endblock content %}

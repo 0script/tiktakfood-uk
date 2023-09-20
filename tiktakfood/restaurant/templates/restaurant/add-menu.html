@@ -1,0 +1,109 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container register">
+    <div class="container register">
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                <h3>Welcome</h3>
+                <p>Get A new dish on your menu !</p>
+                <!-- <input type="submit" name="" value="Login"/><br/> -->
+                <a href="{% url 'login' %}" class="btn btn-primary rounded">Login</a>
+            </div>
+            <div class="col-md-9 register-right">
+
+                <form class="tab-content" id="myTabContent" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Add Menu Item</h3>
+                        <div class="row register-form">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="name" placeholder="Menu Name *" value="" />
+                                    <small class="form-text text-muted">{{formError}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Enter Ingredient *" value="" name="ingredient"/>
+                                    <small class="form-text text-muted">{{formError}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="number" min="0" class="form-control" placeholder="Cuisson Time In minute *" value="" name="cuisson_time"/>
+                                    <small class="form-text text-muted">{{formError}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="maxl">
+                                        <label class="radio inline"> 
+                                            <input 
+                                                type="radio" 
+                                                name="category" 
+                                                value="Entre" 
+                                                checked
+                                                >
+                                            <span> Entree </span> 
+                                        </label>
+                                        <label class="radio inline"> 
+                                            <input 
+                                                type="radio" 
+                                                name="category" 
+                                                value="Appetizer">
+                                            <span>Appetizers </span> 
+                                        </label>
+                                        <label class="radio inline"> 
+                                            <input 
+                                                type="radio" 
+                                                name="category" 
+                                                value="Desert">
+                                            <span>Desert </span> 
+                                        </label>
+                                        <label class="radio inline"> 
+                                            <input 
+                                                type="radio" 
+                                                name="category" 
+                                                value="Drink">
+                                            <span>Drink </span> 
+                                        </label>
+                                    </div>
+                                    <small class="form-text text-muted">{{formError}}</small>
+                                </div>
+                            </div>
+
+                            
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <input type="number" min="1" class="form-control" placeholder="For how many people *" value="" name="for_people"/>
+                                    <small class="form-text text-muted">{{formError}}</small>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="profile_picture">Price</label>
+                                    <input type="number" required min="0" value="0" name="price" step=".01">
+                                    <small id="dob-errors" class="form-text text-muted">{{formError}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="profile_picture">Picture</label>
+                                    <input type="file" accept="image/png, image/jpeg" class="button"  name="picture" id="profile_picture" placeholder="Enter Picture">
+                                    <small id="dob-errors" class="form-text text-muted">{{formError}}</small>
+                                </div>
+
+                                <input type="submit"  class="btn btn-primary rounded"  value="Register"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
