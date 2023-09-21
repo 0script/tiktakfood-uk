@@ -7,56 +7,36 @@
             <div class="col-md-3 register-left">
                 <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
                 <h3>Welcome</h3>
-                <p>You are 30 seconds away from tasty food!</p>
+                <p>Update your profile information </p>
                 <a href="{% url 'login' %}" class="btn btn-primary rounded">Login</a>
             </div>
             <div class="col-md-9 register-right">
-                <form class="tab-content" id="myTabContent" method="POST" enctype="multipart/form-data">
+                <form class="tab-content" id="myTabContent" method="POST">
                     {% csrf_token %}
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <h3 class="register-heading">Register a Customer Account</h3>
+                        <h3 class="register-heading">Edit your user profile</h3>
                         <div class="row register-form">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="first_name" placeholder="First Name *" value="" />
-                                    <small class="form-text text-muted">{{formError.first_name}}</small>
+                                    <small class="form-text text-muted"></small>
                                 </div>
 
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Last Name *" value="" name="last_name"/>
-                                    <small class="form-text text-muted">{{formError.last_name}}</small>
+                                    <small class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Username *" value="" name="username"/>
-                                    <small class="form-text text-muted">{{formError.username}}</small>
+                                    <small class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control" placeholder="Password *" value="" name="password"/>
-                                    <small class="form-text text-muted">{{formError.password}}</small>
+                                    <small class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control"  placeholder="Confirm Password *" value="" name="password2"/>
-                                    <small class="form-text text-muted">{{formError.password2}}</small>
-                                </div>
-                                <div class="form-group">
-                                    <div class="maxl">
-                                        <label class="radio inline"> 
-                                            <input 
-                                                type="radio" 
-                                                name="gender" 
-                                                value="male" 
-                                                checked>
-                                            <span> Male </span> 
-                                        </label>
-                                        <label class="radio inline"> 
-                                            <input 
-                                                type="radio" 
-                                                name="gender" 
-                                                value="female">
-                                            <span>Female </span> 
-                                        </label>
-                                    </div>
-                                    <small class="form-text text-muted">{{formError.gender}}</small>
+                                    <small class="form-text text-muted"></small>
                                 </div>
                             </div>  
 
@@ -64,31 +44,31 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="email" class="form-control" placeholder="Your Email *" value="" name="email"/>
-                                    <small class="form-text text-muted">{{formError.email}}</small>
+                                    <small class="form-text text-muted"></small>
                                 </div>
 
                                 <div class="form-group">
                                     <input type="text" minlength="10" maxlength="10" name="phone" class="form-control" placeholder="Your Phone *" value="" name="phone" />
-                                    <small class="form-text text-muted">{{formError.phone}}</small>
+                                    <small class="form-text text-muted"></small>
                                 </div>
 
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="address" placeholder="Enter Your Address *" value="" />
-                                    <small class="form-text text-muted">{{formError.address}}</small>
+                                    <small class="form-text text-muted"></small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="dob">Date Of Birth</label>
                                     <input type="date" class="form-control"  name="birthday" max="2013-01-28" min="1870-01-20" id="dob" aria-describedby="dateOfBirthHelp" placeholder="Enter Date Of Birth">
-                                       <small id="dob-errors" class="form-text text-muted">{{formError.birthday}}</small>
+                                       <small id="dob-errors" class="form-text text-muted"></small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="profile_picture">Profile Picture</label>
-                                    <input type="file" accept="image/png, image/jpeg" class="button"  name="profile" id="profile" placeholder="Enter Profile Picture">
-                                    <small id="dob-errors" class="form-text text-muted">{{formError.profile}}</small>
+                                    <input type="file" accept="image/png, image/jpeg" class="button"  name="profile" id="profile_picture" placeholder="Enter Profile Picture">
+                                    <small id="dob-errors" class="form-text text-muted"></small>
                                 </div>
-                                <input type="submit"  class="btn btn-primary rounded"  value="Register"/>
+                                <input type="submit"  class="btn btn-primary rounded"  value="Update Profile"/>
                             </div>
                         </div>
                     </div>

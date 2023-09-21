@@ -6,7 +6,7 @@ class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone=models.CharField(max_length=254)
     address=models.CharField(max_length=254)
-    profile=models. ImageField(upload_to='profile_picture')
+    profile=models.ImageField(upload_to='profile_picture')
 
     def get_absolute_url(self):
         return reverse('customer:customer-profile',kwargs={'pk':self.pk})

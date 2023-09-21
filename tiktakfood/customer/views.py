@@ -83,10 +83,14 @@ class Registration(View):
                 gender=form.cleaned_data['gender']
                 password=form.cleaned_data['password']
 
-                if request.POST['profile']=='':
-                    profile=''
-                else:
-                    profile=form.cleaned_data('profile')
+
+                # print(request.POST.get('profile'))
+                # print(request.FILES.get('photo'))
+                # if request.POST['profile']=='':
+                #     profile=''
+                # else:
+                #     profile=request.FILES['profile']
+                # print(request.FILES['picture'])
 
                 new_user = User.objects.create_user(
                     username=username,
@@ -98,13 +102,26 @@ class Registration(View):
 
                 new_user.save()
 
-                customer=Customer(
-                    user=new_user,
-                    phone=phone,
-                    address=address,
-                    profile=profile,
+                if request.FILES['profile']:
+                    print('profile')
+                    print(request.FILES.get('profile'))
+                    profile=request.FILES.get('profile')
 
-                )
+                    print(profile)
+                    customer=Customer(
+                        user=new_user,
+                        phone=phone,
+                        address=address,
+                        profile=profile
+                    )
+                else:
+                    customer=Customer(
+                        user=new_user,
+                        phone=phone,
+                        address=address,
+                    )
+                    print('empty')
+                
                 customer.save()
                 print('customer ok')
                 print(customer.user.username)
@@ -124,6 +141,18 @@ class Registration(View):
                 }
                 return render(request,'customer/registration.html',context=context)
         
+class EditProfile(View):
+    def get(self,request,*args,**kwargs):
+        return render(request,'customer/edit-profile.html')
+    def post(self,request,*args,**kwargs):
+        
+        if request.method=='POST':
+            request.session['page']='EditProfile'
+            print(request)
+            # context={
+                
+            # }
+            return render(request,'customer/edit-profile.html')
 
 class DashboardCustomer(View):
     def get(self,request,*args,**kwargs):

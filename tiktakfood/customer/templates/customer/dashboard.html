@@ -7,8 +7,14 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                        
+                        {% if request.user.customer.profile %}
+                          <img src="{{ request.user.customer.profile.url }}" alt=""/>
+              
+                        {% else %}
+                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+              
+                        {% endif %}
+                                  
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -24,9 +30,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Order</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -47,7 +53,6 @@
                 <div class="col-md-4">
                     <div class="profile-work">
 
-                        <a href="" class="btn btn-primary  w-75 p-3 text-light ">Edit Profile</a><br/>
                         <!-- <a href="" href="{% url 'customer:customer-orders' %}" class="btn btn-primary  w-75 p-3 text-light ">My Orders</a><br/> -->
                         <a  href="{% url 'customer:customer-orders' %}" class="btn btn-primary  w-75 p-3 text-light ">My Orders</a><br/>
                         <a href="{% url 'registration-restaurant' %}" class="btn btn-primary w-75 p-3 text-light">Register Restaurant</a><br/>

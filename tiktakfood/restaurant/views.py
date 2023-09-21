@@ -54,9 +54,10 @@ class RestaurantRegistration(View):
                     restaurant_phone = form.cleaned_data["restaurant_phone"]
                     restaurant_address = form.cleaned_data["restaurant_address"]
                     restaurant_email = form.cleaned_data["restaurant_email"]
-                    restaurant_profile = form.cleaned_data["restaurant_profile"]
+                    restaurant_profile = request.FILES.get('profile')
                     
                     print('rrr')
+                    print(restaurant_profile)
                     
                     print(name,restaurant_address,restaurant_phone,restaurant_profile)
                     user=User.objects.get(id=request.user.id)
@@ -71,14 +72,15 @@ class RestaurantRegistration(View):
                                 restaurant_email=restaurant_email,
                                 restaurant_profile=restaurant_profile
                             )
-                        restaurant=Restaurant.objects.create(
-                            user=user,
-                            name=name,
-                            restaurant_address=restaurant_address,
-                            restaurant_phone=restaurant_phone,
-                            restaurant_email=restaurant_email,
-                            restaurant_profile=restaurant_profile
-                        )
+                        else:
+                            restaurant=Restaurant.objects.create(
+                                user=user,
+                                name=name,
+                                restaurant_address=restaurant_address,
+                                restaurant_phone=restaurant_phone,
+                                restaurant_email=restaurant_email,
+                                restaurant_profile=restaurant_profile
+                            )
                     if restaurant_email:
                         print('email')
                         try:

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'restaurant',
     'customer',
+    'driver',
     'crispy_forms',
     'allauth',
     'allauth.account',
