@@ -18,7 +18,6 @@ class RegistrationForm(forms.Form):
     phone=forms.CharField()
     address=forms.CharField()
     birthday=forms.DateField()
-    profile=forms.ImageField(required=False)
 
     
     # source = forms.CharField(       # A hidden input for internal use
